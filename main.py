@@ -57,11 +57,28 @@ cursor = conexao.cursor()
 #Sempre usar WHERE, senao todos os registros serao alterados
 
 
-cursor.execute("""
-UPDATE alunos
-SET nome = ?, curso = ?
-WHERE id = ?
-""", ("Felipe", "Ads", 2))
+# cursor.execute("""
+# UPDATE alunos
+# SET nome = ?, curso = ?
+# WHERE id = ? 
+# """, ("Felipe", "Ads", 2))
 
-conexao.commit()
-print ("Dados alterados com sucesso!")
+# conexao.commit()
+# print ("Dados alterados com sucesso!")
+
+
+
+
+#Consultar os dados--------------------------------
+#Selecionando todos os alunos
+cursor.execute("SELECT * FROM alunos")
+#fetchall traz todas as linhas de consulta
+
+for linha in cursor.fetchall():
+    print(f"ID {linha[0]} | NOME {linha[1]} | IDADE {linha[2]} | CURSO {linha[3]}")
+
+curso = input("Qual curso você deseja ver os alunos? ")
+#Selecionando apenas os alunos do curso computação
+cursor.execute("SELECT nome, idade FROM alunos WHERE curso = ?", (curso,))
+for linha in cursor.fetchall():
+    print(linha)
