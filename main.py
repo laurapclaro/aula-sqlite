@@ -69,16 +69,27 @@ cursor = conexao.cursor()
 
 
 
-#Consultar os dados--------------------------------
-#Selecionando todos os alunos
-cursor.execute("SELECT * FROM alunos")
-#fetchall traz todas as linhas de consulta
+# #Consultar os dados--------------------------------
+# #Selecionando todos os alunos
+# cursor.execute("SELECT * FROM alunos")
+# #fetchall traz todas as linhas de consulta
 
-for linha in cursor.fetchall():
-    print(f"ID {linha[0]} | NOME {linha[1]} | IDADE {linha[2]} | CURSO {linha[3]}")
+# for linha in cursor.fetchall():
+#     print(f"ID {linha[0]} | NOME {linha[1]} | IDADE {linha[2]} | CURSO {linha[3]}")
 
-curso = input("Qual curso você deseja ver os alunos? ")
-#Selecionando apenas os alunos do curso computação
-cursor.execute("SELECT nome, idade FROM alunos WHERE curso = ?", (curso,))
-for linha in cursor.fetchall():
-    print(linha)
+# curso = input("Qual curso você deseja ver os alunos? ")
+# #Selecionando apenas os alunos do curso computação
+# cursor.execute("SELECT nome, idade FROM alunos WHERE curso = ?", (curso,))
+# for linha in cursor.fetchall():
+#     print(linha)
+
+
+#Deletando dados no banco ---------------------------------------------
+deletar = input("Digite o id do aluno que deseja deletar: ")
+cursor.execute("DELETE FROM alunos WHERE ID  = ?", ())
+conexao.commit()
+print("Alunp removido")
+
+#Sempre fechar a conexão no final ----------------------------------------------
+conexao.close()
+#se nao fechar, gasta memoria
